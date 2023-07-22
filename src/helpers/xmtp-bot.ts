@@ -8,11 +8,15 @@ const wallet = new Wallet(key)
 
 qrcode.generate(`https://go.cb-w.com/messaging?address=${wallet?.address}`)
 
-run(async (context) => {
-  // When someone sends your bot a message, you can get the DecodedMessage
-  // from the HandlerContext's `message` field
-  const messageBody = context.message.content;
+console.log(`Your bot wallet address is ${wallet?.address}`)
 
-  // To reply, just call `reply` on the HandlerContext.
-  await context.reply(`ECHO: ${messageBody}`);
-})
+export const botHandler = () => {
+  run(async (context) => {
+    // When someone sends your bot a message, you can get the DecodedMessage
+    // from the HandlerContext's `message` field
+    const messageBody = context.message.content;
+  
+    // To reply, just call `reply` on the HandlerContext.
+    await context.reply(`ECHO: ${messageBody}`);
+  })
+}
