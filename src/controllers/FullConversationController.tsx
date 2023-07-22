@@ -1,10 +1,13 @@
+import { useCanMessage } from "@xmtp/react-sdk";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { DateDivider } from "../component-library/components/DateDivider/DateDivider";
 import { FullConversation } from "../component-library/components/FullConversation/FullConversation";
+import { RecipientInputMode } from "../helpers";
+import useGetMessages from "../hooks/useGetMessages";
+import useGetRecipientInputMode from "../hooks/useGetRecipientInputMode";
 import { useXmtpStore } from "../store/xmtp";
 import { FullMessageController } from "./FullMessageController";
-import useGetMessages from "../hooks/useGetMessages";
 
 export const FullConversationController = () => {
   let lastMessageDate: Date;
@@ -17,6 +20,7 @@ export const FullConversationController = () => {
     setInitialConversationLoaded(false);
   }, [conversationId]);
 
+  const { canMessage } = useCanMessage();
   // XMTP Hooks
   const {
     messages = [],
@@ -26,11 +30,36 @@ export const FullConversationController = () => {
   } = useGetMessages(conversationId as string);
 
   if (messages.length === 0) {
-    console.log("welcome")
+    console.log("welcome");
   }
 
   const isOnSameDay = (d1?: Date, d2?: Date): boolean =>
     d1?.toDateString() === d2?.toDateString();
+
+  const setRecipientWalletAddress = useXmtpStore(
+    (state) => state.setRecipientWalletAddress,
+  );
+  const setConversationId = useXmtpStore((state) => state.setConversationId);
+  const setStartedFirstMessage = useXmtpStore(
+    (state) => state.setStartedFirstMessage,
+  );
+  // XMTP Hooks
+  const { setRecipientInputMode, setRecipientEnteredValue } =
+    useGetRecipientInputMode();
+
+  const handleClick = (msg: string) => {
+    const ethereumAddressRegex = /0x[a-fA-F0-9]{40}/g;
+    const booleanRegex = /(true|false)$/g;
+    const address = msg.match(ethereumAddressRegex);
+    const xmtp = msg.match(booleanRegex);
+    if (address !== null && address?.length > 0 && xmtp !== null && xmtp[0]) {
+      setRecipientWalletAddress(address[0]);
+      setRecipientInputMode(RecipientInputMode.InvalidEntry);
+      setConversationId();
+      setRecipientEnteredValue("");
+      setStartedFirstMessage(true);
+    }
+  };
 
   return (
     <div
@@ -59,7 +88,9 @@ export const FullConversationController = () => {
               ? !isOnSameDay(lastMessageDate, msg.sent)
               : false;
             const messageDiv = (
-              <div key={`${msg.id}_${index}`}>
+              <div
+                key={`${msg.id}_${index}`}
+                onClick={() => handleClick(msg.content)}>
                 {messages.length === 1 || index === messages.length - 1 ? (
                   <DateDivider date={msg.sent} />
                 ) : null}
