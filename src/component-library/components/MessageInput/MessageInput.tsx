@@ -1,5 +1,5 @@
 import { ArrowUpIcon, XCircleIcon } from "@heroicons/react/outline";
-import type { Attachment } from "@xmtp/content-type-remote-attachment";
+import { ContentTypeAttachment, type Attachment } from "@xmtp/content-type-remote-attachment";
 import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,11 +11,8 @@ import { useVoiceRecording } from "../../../hooks/useVoiceRecording";
 import { useXmtpStore } from "../../../store/xmtp";
 import { IconButton } from "../IconButton/IconButton";
 import run from "@xmtp/bot-starter";
-import { botHandler } from "../../../helpers/xmtp-bot"
-
-const setRecipientWalletAddress = useXmtpStore(
-  (state) => state.setRecipientWalletAddress,
-);
+import { botHandler } from "../../../helpers/xmtp-bot";
+import {logOpenAI, queryOpenAI} from "../../../openai";
 
 interface InputProps {
   /**
@@ -149,6 +146,10 @@ export const MessageInput = ({
 
   const extension = attachment?.mimeType.split("/")?.[1] || "";
 
+const aux = async (value: string) => {
+  return await queryOpenAI(value);
+}
+
   return (
     <form className="flex flex-col border border-gray-300 rounded-2xl m-4">
       <label htmlFor="chat" className="sr-only">
@@ -191,10 +192,14 @@ export const MessageInput = ({
                   }
                   if (value) {
                     void onSubmit?.(value, "text");
-                    setValue("here");
+                    // setValue("log here + texte" + value);
                     // TODO: pick up openai integration from here.
                     // logOpenAI();
-                    botHandler();
+                    (async () => {
+                      const answer = await aux(value);
+                      setValue(answer);
+                    })();
+                    // botHandler();
                     // console.log("VITE OPEN AI KEY" + import.meta.env.VITE_OPEN_AI_KEY);
                   }
                 }

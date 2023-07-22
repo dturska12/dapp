@@ -19,12 +19,27 @@ export const logOpenAI = async () => {
   console.log(configuration.apiKey);
 
   const chatCompletion = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
+    model: "gpt-4",
     messages: [{role: "user", content: "Invite the user to our app and explain that the bot will help to prepare the query for airstack.xyz"}],
   });
   console.log(chatCompletion.data.choices[0].message);
-   
 }
+
+
+export const queryOpenAI = async (value: string) => {
+  console.log("openai initialized");
+  console.log(configuration.apiKey);
+
+  const chatCompletion = await openai.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    messages: [{role: "user", content: value}],
+  });
+  console.log(chatCompletion.data);
+  return chatCompletion.data.choices[0].message?.content;
+}
+
+
+
 
 // const openai = new OpenAIApi(configuration);
 
