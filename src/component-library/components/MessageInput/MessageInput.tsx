@@ -17,6 +17,7 @@ import { classNames } from "../../../helpers";
 import { useXmtpStore } from "../../../store/xmtp";
 import { useVoiceRecording } from "../../../hooks/useVoiceRecording";
 import { useRecordingTimer } from "../../../hooks/useRecordingTimer";
+import { logOpenAI } from "../../../openai";
 
 interface InputProps {
   /**
@@ -194,6 +195,9 @@ export const MessageInput = ({
                   if (value) {
                     void onSubmit?.(value, "text");
                     setValue("");
+                    // TODO: pick up openai integration from here.
+                    // logOpenAI();
+                    // console.log("VITE OPEN AI KEY" + import.meta.env.VITE_OPEN_AI_KEY);
                   }
                 }
               }

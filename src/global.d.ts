@@ -38,6 +38,7 @@ interface ImportMeta {
     VITE_WEB3_STORAGE_TOKEN: string;
     VITE_XMTP_API_URL: string;
     VITE_XMTP_ENVIRONMENT: string;
+    VITE_OPENAI_API_KEY: string;
     VITE_GOOGLE_TAG_ID: string | undefined;
     VITE_UNS_TOKEN: string;
     VITE_PROJECT_ID: string;
