@@ -1,25 +1,21 @@
 import { Dialog, Transition } from "@headlessui/react";
-import type React from "react";
-import { Fragment, useEffect, useState } from "react";
-import {
-  ChatAlt2Icon,
-  CheckCircleIcon,
-  ChevronDoubleRightIcon,
-} from "@heroicons/react/solid";
 import {
   ClipboardCopyIcon,
   CogIcon,
   SparklesIcon,
   XIcon,
 } from "@heroicons/react/outline";
+import { ChatAlt2Icon, ChevronDoubleRightIcon } from "@heroicons/react/solid";
+import type React from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { QRCode } from "react-qrcode-logo";
-import { classNames, isAppEnvDemo, shortAddress } from "../../../helpers";
-import { XmtpIcon } from "../Icons/XmtpIcon";
+import { classNames, shortAddress } from "../../../helpers";
+import i18next, { supportedLocales } from "../../../helpers/i18n";
 import { Avatar } from "../Avatar/Avatar";
 import { GhostButton } from "../GhostButton/GhostButton";
 import { DisconnectIcon } from "../Icons/DisconnectIcon";
-import i18next, { supportedLocales } from "../../../helpers/i18n";
+import { XmtpIcon } from "../Icons/XmtpIcon";
 
 interface SideNavProps {
   /**
@@ -194,9 +190,9 @@ const SideNav = ({
                 </div>
               )}
             </div>
-            <div className="flex flex-col items-start pt-4 space-y-4">
+            {/* <div className="flex flex-col items-start pt-4 space-y-4">
               {mappedButtons}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -282,7 +278,7 @@ const SideNav = ({
           onClose={onXmtpIconClick}
           aria-label={t("menu.settings") || ""}>
           <div className="bg-white w-fit rounded-lg absolute bottom-16 left-12 p-2 z-20">
-            <div className="max-h-80 overflow-auto">
+            {/* <div className="max-h-80 overflow-auto">
               {mappedLangs.map(({ displayText, isSelected, lang }) => (
                 <div className="flex p-2 justify-between" key={lang}>
                   <button
@@ -338,8 +334,8 @@ const SideNav = ({
                 rel="noreferrer">
                 {t("common.report_bug")}
               </a>
-            </span>
-            <hr className="m-2" />
+            </span> 
+            <hr className="m-2" /> */}
             <GhostButton
               onClick={onDisconnect}
               label={t("common.disconnect")}

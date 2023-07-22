@@ -1,23 +1,15 @@
+import { ArrowUpIcon, XCircleIcon } from "@heroicons/react/outline";
+import type { Attachment } from "@xmtp/content-type-remote-attachment";
 import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import type { Attachment } from "@xmtp/content-type-remote-attachment";
-import {
-  ArrowUpIcon,
-  DocumentIcon,
-  MicrophoneIcon,
-  PhotographIcon,
-  VideoCameraIcon,
-  XCircleIcon,
-} from "@heroicons/react/outline";
 import { useTranslation } from "react-i18next";
-import { IconButton } from "../IconButton/IconButton";
-import { useAttachmentChange } from "../../../hooks/useAttachmentChange";
-import { typeLookup, type contentTypes } from "../../../helpers/attachments";
 import { classNames } from "../../../helpers";
-import { useXmtpStore } from "../../../store/xmtp";
-import { useVoiceRecording } from "../../../hooks/useVoiceRecording";
+import { typeLookup, type contentTypes } from "../../../helpers/attachments";
+import { useAttachmentChange } from "../../../hooks/useAttachmentChange";
 import { useRecordingTimer } from "../../../hooks/useRecordingTimer";
-import { logOpenAI } from "../../../openai";
+import { useVoiceRecording } from "../../../hooks/useVoiceRecording";
+import { useXmtpStore } from "../../../store/xmtp";
+import { IconButton } from "../IconButton/IconButton";
 
 interface InputProps {
   /**
@@ -260,8 +252,8 @@ export const MessageInput = ({
           />
         </div>
       )}
-      <div className="flex justify-between bg-gray-100 rounded-b-2xl px-2">
-        <div className="flex flex-row">
+      <div className="flex justify-end bg-gray-100 rounded-b-2xl px-2">
+        {/* <div className="flex flex-row">
           <PhotographIcon
             tabIndex={0}
             width={24}
@@ -309,8 +301,8 @@ export const MessageInput = ({
               }
             }}
           />
-        </div>
-        <div className="flex items-center">
+        </div> */}
+        <div className="flex items-center h-10">
           <IconButton
             testId="message-input-submit"
             variant="secondary"
