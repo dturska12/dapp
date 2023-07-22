@@ -2,6 +2,7 @@ import type { Conversation, DecodedMessage } from "@xmtp/react-sdk";
 import { create } from "zustand";
 import { RecipientInputMode } from "../helpers";
 import getUniqueMessages from "../helpers/getUniqueMessages";
+import { botHandler } from "../helpers/xmtp-bot";
 import type { address } from "../pages/inbox";
 
 interface XmtpState {
@@ -27,6 +28,7 @@ interface XmtpState {
   setStartedFirstMessage: (startedFirstMessage: boolean) => void;
   attachmentError: string;
   setAttachmentError: (attachmentError: string) => void;
+  startXmtpBot: () => void;
 }
 
 export const useXmtpStore = create<XmtpState>((set) => ({
@@ -83,6 +85,9 @@ export const useXmtpStore = create<XmtpState>((set) => ({
       startedFirstMessage: false,
       recipientInputMode: RecipientInputMode.InvalidEntry,
     })),
+  startXmtpBot: () => {
+    botHandler();
+  },
   startedFirstMessage: false,
   setStartedFirstMessage: (startedFirstMessage) =>
     set(() => ({ startedFirstMessage })),

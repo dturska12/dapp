@@ -146,7 +146,7 @@ const Inbox: React.FC<{ children?: React.ReactNode }> = () => {
                   <AddressInputController />
                 </div>
                 <div className="h-full overflow-auto flex flex-col">
-                  {conversationId && <FullConversationController />}
+                  {true && <FullConversationController />}
                 </div>
                 {/* Drag event handling needing for content attachments */}
                 <MessageInputController

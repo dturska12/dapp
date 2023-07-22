@@ -12,6 +12,7 @@ export const HeaderDropdownController = () => {
   const setStartedFirstMessage = useXmtpStore(
     (state) => state.setStartedFirstMessage,
   );
+  const startXmtpBot = useXmtpStore((state) => state.startXmtpBot);
 
   // XMTP Hooks
   const { setRecipientInputMode, setRecipientEnteredValue } =
@@ -25,6 +26,7 @@ export const HeaderDropdownController = () => {
         setConversationId();
         setRecipientEnteredValue("");
         setStartedFirstMessage(true);
+        startXmtpBot();
       }}
       disabled
     />
