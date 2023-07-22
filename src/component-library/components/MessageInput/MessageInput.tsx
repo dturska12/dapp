@@ -10,9 +10,6 @@ import { useRecordingTimer } from "../../../hooks/useRecordingTimer";
 import { useVoiceRecording } from "../../../hooks/useVoiceRecording";
 import { useXmtpStore } from "../../../store/xmtp";
 import { IconButton } from "../IconButton/IconButton";
-import run from "@xmtp/bot-starter";
-import { botHandler } from "../../../helpers/xmtp-bot";
-import {logOpenAI, queryOpenAI} from "../../../openai";
 
 interface InputProps {
   /**
@@ -192,14 +189,9 @@ const aux = async (value: string) => {
                   }
                   if (value) {
                     void onSubmit?.(value, "text");
-                    // setValue("log here + texte" + value);
+                    setValue("");
                     // TODO: pick up openai integration from here.
                     // logOpenAI();
-                    (async () => {
-                      const answer = await aux(value);
-                      setValue(answer);
-                    })();
-                    // botHandler();
                     // console.log("VITE OPEN AI KEY" + import.meta.env.VITE_OPEN_AI_KEY);
                   }
                 }
