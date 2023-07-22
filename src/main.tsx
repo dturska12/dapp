@@ -1,13 +1,15 @@
+// disable es-lint
 import "./polyfills";
+
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import "@rainbow-me/rainbowkit/styles.css";
+import { XMTPProvider } from "@xmtp/react-sdk";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "@rainbow-me/rainbowkit/styles.css";
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { publicProvider } from "wagmi/providers/public";
-import { XMTPProvider } from "@xmtp/react-sdk";
 import { mainnet } from "wagmi/chains";
 import { infuraProvider } from "wagmi/providers/infura";
+import { publicProvider } from "wagmi/providers/public";
 import App from "./controllers/AppController";
 import { isAppEnvDemo } from "./helpers";
 import { mockConnector } from "./helpers/mockConnector";
