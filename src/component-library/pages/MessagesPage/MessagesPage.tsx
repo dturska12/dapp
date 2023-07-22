@@ -67,12 +67,22 @@ export const MessagesPage = ({ type }: MessagesPageProps) => {
           <SideNav />
           <div className="flex flex-col h-screen md:h-full w-full overflow-auto">
             <HeaderDropdown />
-            <ConversationList messages={[<MessagePreviewCard key={0} />]} />
+            <ConversationList
+              messages={[
+                ...(Array(20).fill(
+                  <MessagePreviewCard
+                    text="Here's an existing message"
+                    displayAddress="theseWillAllBeTheSame.xmtp.eth"
+                    datetime={new Date()}
+                  />,
+                ) as JSX.Element[]),
+              ]}
+            />
           </div>
         </div>
         <div className="flex w-full overflow-visible md:overflow-hidden flex-col h-screen md:h-full ">
           <AddressInput />
-          <FullConversation messages={[]} />
+          <FullConversation messages={Array(2).fill(alternatingMessage)} />
           <MessageInput
             setAttachment={() => {}}
             setAttachmentPreview={() => {}}

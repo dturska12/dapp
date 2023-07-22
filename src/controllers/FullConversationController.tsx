@@ -25,6 +25,10 @@ export const FullConversationController = () => {
     isLoading,
   } = useGetMessages(conversationId as string);
 
+  if (messages.length === 0) {
+    console.log("welcome")
+  }
+
   const isOnSameDay = (d1?: Date, d2?: Date): boolean =>
     d1?.toDateString() === d2?.toDateString();
 

@@ -58,7 +58,6 @@ interface InputProps {
 
 export const MessageInput = ({
   onSubmit,
-  isDisabled,
   conversationId,
   attachment,
   setAttachment,
@@ -327,9 +326,9 @@ export const MessageInput = ({
                 textAreaRef.current?.focus();
               }
             }}
-            isDisabled={
-              !(value || attachmentPreview) || isDisabled || !!attachmentError
-            }
+            // isDisabled={
+            //   !(value || attachmentPreview) || isDisabled || !!attachmentError
+            // }
           />
         </div>
       </div>
