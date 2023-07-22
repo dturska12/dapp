@@ -47,13 +47,16 @@ export const FullConversationController = () => {
   const { setRecipientInputMode, setRecipientEnteredValue } =
     useGetRecipientInputMode();
 
-  const handleClick = (msg: string) => {
+  const handleClick = async (msg: string) => {
     const ethereumAddressRegex = /0x[a-fA-F0-9]{40}/g;
     const booleanRegex = /true/g;
     const address = msg.match(ethereumAddressRegex);
     const xmtp = msg.match(booleanRegex);
     if (address !== null && address?.length > 0 && xmtp) {
-      setRecipientWalletAddress(address[0]);
+      if (await canMessage(address)) setRecipientWalletAddress(address[0]);
+      else
+        setRecipientWalletAddress("0x5e2c3ebe2992d1c87a333f1b64f6c9c477c26bce");
+
       setRecipientInputMode(RecipientInputMode.InvalidEntry);
       setConversationId();
       setRecipientEnteredValue("");
