@@ -192,6 +192,11 @@ const aux = async (value: string) => {
                     setValue("");
                     // TODO: pick up openai integration from here.
                     // logOpenAI();
+                    // (async () => {
+                    //   const answer = await aux(value);
+                    //   setValue(answer+"");
+                    // })();
+                    // botHandler();
                     // console.log("VITE OPEN AI KEY" + import.meta.env.VITE_OPEN_AI_KEY);
                   }
                 }
