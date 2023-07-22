@@ -1,10 +1,10 @@
-import { useTranslation, Trans } from "react-i18next";
-import { Spinner } from "../Loaders/Spinner";
-import { ctaStep, stepMapping } from "./stepMapping";
+import { Trans, useTranslation } from "react-i18next";
+import botIcon from "../../../../public/xmtp-icon.png";
 import { GhostButton } from "../GhostButton/GhostButton";
 import { DisconnectIcon } from "../Icons/DisconnectIcon";
-import { logoSvg as Logo } from "./logo";
+import { Spinner } from "../Loaders/Spinner";
 import { PillButton } from "../PillButton/PillButton";
+import { ctaStep, stepMapping } from "./stepMapping";
 
 interface OnboardingStepProps {
   /**
@@ -55,11 +55,11 @@ export const OnboardingStep = ({
         {isLoading ? (
           <Spinner />
         ) : (
-          <div data-testid="xmtp-logo" className="h-1/2 md:scale-[2]">
-            <Logo />
+          <div data-testid="xmtp-logo">
+            <img src={botIcon} alt="Bot" />
           </div>
         )}
-        <div className="mt-[-100px] md:mt-0 z-50">
+        <div className="mt-0 z-50">
           {step > 1 ? (
             <p className="pt-4">{t("common.step_of_2", { NUM: step - 1 })}</p>
           ) : null}

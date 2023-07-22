@@ -1,8 +1,8 @@
 {
   "onboarding": {
     "demo_header": "Initializing demo mode…",
-    "intro_header": "An interoperable web3 inbox",
-    "intro_subheader": "Access all of your XMTP DMs—no matter where you started them.",
+    "intro_header": "ChitChatChain",
+    "intro_subheader": "A bot accessible to any chat that uses XMTP.",
     "intro_button": "Connect your wallet",
     "connect_header": "Connecting to your wallet...",
     "connect_subheader": "Select a wallet account to use to create your XMTP identity. Then allow this app to connect to the account.",
@@ -67,7 +67,7 @@
   },
   "common": {
     "disconnect": "Disconnect wallet",
-    "private_key_note": "No private keys will be shared.",
+    "private_key_note": "",
     "step_of_2": "Step {{NUM}} of 2",
     "disconnect_tip": "<strong>Tip</strong>: If clicking <strong>Disconnect wallet</strong> doesn’t disconnect your wallet, please use your wallet extension directly to disconnect from this app.",
     "input_label": "To",

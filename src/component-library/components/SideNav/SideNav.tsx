@@ -10,12 +10,12 @@ import type React from "react";
 import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { QRCode } from "react-qrcode-logo";
+import botIcon from "../../../../public/xmtp-icon.png";
 import { classNames, shortAddress } from "../../../helpers";
 import i18next, { supportedLocales } from "../../../helpers/i18n";
 import { Avatar } from "../Avatar/Avatar";
 import { GhostButton } from "../GhostButton/GhostButton";
 import { DisconnectIcon } from "../Icons/DisconnectIcon";
-import { XmtpIcon } from "../Icons/XmtpIcon";
 
 interface SideNavProps {
   /**
@@ -47,7 +47,6 @@ type Lang = {
 };
 
 const SideNav = ({
-  icon = <XmtpIcon />,
   displayAddress,
   walletAddress,
   avatarUrl,
@@ -204,7 +203,7 @@ const SideNav = ({
           tabIndex={0}
           className="cursor-pointer"
           data-testid="icon">
-          {icon}
+          <img src={botIcon} alt="Bot" />
         </div>
       </div>
       <Transition.Root show={isQrCodeDialogOpen} as={Fragment}>
