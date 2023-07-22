@@ -49,10 +49,10 @@ export const FullConversationController = () => {
 
   const handleClick = (msg: string) => {
     const ethereumAddressRegex = /0x[a-fA-F0-9]{40}/g;
-    const booleanRegex = /(true|false)$/g;
+    const booleanRegex = /true$/g;
     const address = msg.match(ethereumAddressRegex);
     const xmtp = msg.match(booleanRegex);
-    if (address !== null && address?.length > 0 && xmtp !== null && xmtp[0]) {
+    if (address !== null && address?.length > 0 && xmtp) {
       setRecipientWalletAddress(address[0]);
       setRecipientInputMode(RecipientInputMode.InvalidEntry);
       setConversationId();
