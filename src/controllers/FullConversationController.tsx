@@ -50,13 +50,20 @@ export const FullConversationController = () => {
   const handleClick = async (msg: string) => {
     const ethereumAddressRegex = /0x[a-fA-F0-9]{40}/g;
     const booleanRegex = /true/g;
+    const groupRegex = /group chat started at/g;
     const address = msg.match(ethereumAddressRegex);
     const xmtp = msg.match(booleanRegex);
-    if (address !== null && address?.length > 0 && xmtp) {
-      if (await canMessage(address)) setRecipientWalletAddress(address[0]);
-      else
-        setRecipientWalletAddress("0x5e2c3ebe2992d1c87a333f1b64f6c9c477c26bce");
-
+    const groupChat = msg.match(groupRegex);
+    if (address !== null && address?.length > 0) {
+      if (xmtp) {
+        if (await canMessage(address)) setRecipientWalletAddress(address[0]);
+        else
+          setRecipientWalletAddress(
+            "0x5e2c3ebe2992d1c87a333f1b64f6c9c477c26bce",
+          );
+      } else if (groupChat) {
+        setRecipientWalletAddress(address[0]);
+      }
       setRecipientInputMode(RecipientInputMode.InvalidEntry);
       setConversationId();
       setRecipientEnteredValue("");
