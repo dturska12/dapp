@@ -1,5 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import {
+  CheckCircleIcon,
   ClipboardCopyIcon,
   CogIcon,
   SparklesIcon,
@@ -11,7 +12,7 @@ import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { QRCode } from "react-qrcode-logo";
 import botIcon from "../../../../public/xmtp-icon.png";
-import { classNames, shortAddress } from "../../../helpers";
+import { classNames, isAppEnvDemo, shortAddress } from "../../../helpers";
 import i18next, { supportedLocales } from "../../../helpers/i18n";
 import { Avatar } from "../Avatar/Avatar";
 import { GhostButton } from "../GhostButton/GhostButton";
@@ -189,9 +190,9 @@ const SideNav = ({
                 </div>
               )}
             </div>
-            {/* <div className="flex flex-col items-start pt-4 space-y-4">
+            <div className="flex flex-col items-start pt-4 space-y-4">
               {mappedButtons}
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
@@ -230,8 +231,8 @@ const SideNav = ({
               <div className="h-8">
                 <img
                   className="h-[100%]"
-                  alt="xmtp-logo"
-                  src="/xmtp-logo.png"
+                  alt="Aura Logo"
+                  src="/aura-light.png"
                 />
               </div>
               <div className="text-center p-4 pb-6">
@@ -240,7 +241,7 @@ const SideNav = ({
               <div className="p-4 flex items-center justify-center rounded-3xl bg-white">
                 <QRCode
                   size={200}
-                  logoImage="/xmtp-icon.png"
+                  logoImage="/aura-source-icon.png"
                   removeQrCodeBehindLogo
                   logoPadding={10}
                   value={`${window.location.origin}/dm/${walletAddress ?? ""}`}
@@ -277,7 +278,7 @@ const SideNav = ({
           onClose={onXmtpIconClick}
           aria-label={t("menu.settings") || ""}>
           <div className="bg-white w-fit rounded-lg absolute bottom-16 left-12 p-2 z-20">
-            {/* <div className="max-h-80 overflow-auto">
+            <div className="max-h-80 overflow-auto">
               {mappedLangs.map(({ displayText, isSelected, lang }) => (
                 <div className="flex p-2 justify-between" key={lang}>
                   <button
@@ -334,7 +335,7 @@ const SideNav = ({
                 {t("common.report_bug")}
               </a>
             </span> 
-            <hr className="m-2" /> */}
+            <hr className="m-2" />
             <GhostButton
               onClick={onDisconnect}
               label={t("common.disconnect")}

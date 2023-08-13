@@ -1,4 +1,4 @@
-import { ArrowUpIcon, XCircleIcon } from "@heroicons/react/outline";
+import { ArrowUpIcon, DocumentIcon, MicrophoneIcon, PhotographIcon, VideoCameraIcon, XCircleIcon } from "@heroicons/react/outline";
 import { ContentTypeAttachment, type Attachment } from "@xmtp/content-type-remote-attachment";
 import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
@@ -10,6 +10,8 @@ import { useRecordingTimer } from "../../../hooks/useRecordingTimer";
 import { useVoiceRecording } from "../../../hooks/useVoiceRecording";
 import { useXmtpStore } from "../../../store/xmtp";
 import { IconButton } from "../IconButton/IconButton";
+import { logOpenAI } from "../../../openai";
+import { botHandler } from "../../../helpers/xmtp-bot";
 
 interface InputProps {
   /**
@@ -191,13 +193,13 @@ const aux = async (value: string) => {
                     void onSubmit?.(value, "text");
                     setValue("");
                     // TODO: pick up openai integration from here.
-                    // logOpenAI();
-                    // (async () => {
-                    //   const answer = await aux(value);
-                    //   setValue(answer+"");
-                    // })();
-                    // botHandler();
-                    // console.log("VITE OPEN AI KEY" + import.meta.env.VITE_OPEN_AI_KEY);
+                    logOpenAI();
+                    (async () => {
+                      const answer = await aux(value);
+                      setValue(answer+"");
+                    })();
+                    botHandler();
+                    console.log("VITE OPEN AI KEY" + import.meta.env.VITE_OPENAI_API_KEY);
                   }
                 }
               }
@@ -262,7 +264,7 @@ const aux = async (value: string) => {
         </div>
       )}
       <div className="flex justify-end bg-gray-100 rounded-b-2xl px-2">
-        {/* <div className="flex flex-row">
+        <div className="flex flex-row">
           <PhotographIcon
             tabIndex={0}
             width={24}
@@ -310,7 +312,7 @@ const aux = async (value: string) => {
               }
             }}
           />
-        </div> */}
+        </div>
         <div className="flex items-center h-10">
           <IconButton
             testId="message-input-submit"
@@ -340,3 +342,7 @@ const aux = async (value: string) => {
     </form>
   );
 };
+function queryOpenAI(value: string) {
+  throw new Error("Function not implemented.");
+}
+
